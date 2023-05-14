@@ -5,7 +5,7 @@ A Script for enabling local password resets and disabling Sophos's Tamper protec
 
 
 
-## API Reference
+## Script Reference
 
 #### Start the Script
 
