@@ -1,7 +1,7 @@
 
 # BootUSB CrackScript
 
-A Plug and Play USB for enabling local password resets and disabling Sophos's Tamper protection.
+A Script for enabling local password resets and disabling Sophos's Tamper protection.
 
 
 
