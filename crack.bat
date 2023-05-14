@@ -142,7 +142,7 @@ if %crackType% EQU 3 (
 )
 
 if %crackType% EQU 4 (
-  "c:/windows/system32/osk.exe"
+  start "" "c:/windows/system32/osk.exe"
 )
 
 goto menu
