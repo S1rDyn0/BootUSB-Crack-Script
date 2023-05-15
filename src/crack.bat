@@ -138,7 +138,7 @@ if %crackType% EQU 3 (
 )
 
 if %crackType% EQU 4 (
-  "c:/windows/system32/osk.exe"
+  start "C:/windows/system32/osk.exe"
 )
 
 if %crackType% EQU 5 (
