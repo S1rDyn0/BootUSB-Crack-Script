@@ -10,7 +10,7 @@ if /i "%CD:~0,2%" NEQ "X:" (
   pause
   cls
   color 07
-  rem exit /b 1
+  exit /b 1
 ) else (
   cls
   color 3F
