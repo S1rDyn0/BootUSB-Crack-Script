@@ -107,7 +107,7 @@ if exist "c:\windows\system32" (
 
   echo -----------------------------------
   color 0A
-  echo Exploit Completed | No errors
+  echo Exploit Completed ^| No errors
   pause
 
 ) else (
@@ -130,7 +130,7 @@ if exist "c:\windows\system32\drivers" (
   
   color 0A
   echo -----------------------------------
-  echo Exploit Completed | No errors
+  echo Exploit Completed ^| No errors
   pause
 
 ) else (
@@ -260,7 +260,7 @@ ren C:\windows\system32\utilman.old utilman.exe || goto cmdFail
 
 color 0A
 echo -----------------------------------
-echo Restore Completed | No errors
+echo Restore Completed ^| No errors
 pause
 
 :exploit6
@@ -302,7 +302,7 @@ ren C:\windows\system32\utilman.old utilman.exe || goto :cmdFail
 
 color 0A
 echo -----------------------------------
-echo Restore Completed | No errors
+echo Restore Completed ^| No errors
 pause
 
 :cmdFail
