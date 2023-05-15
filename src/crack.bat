@@ -10,7 +10,7 @@ if /i "%CD:~0,2%" NEQ "X:" (
   pause
   cls
   color 07
-  exit /b 1
+  rem exit /b 1
 ) else (
   cls
   color 3F
@@ -187,35 +187,6 @@ if exist "c:\windows\system32" (
 :exploit5
 cls
 echo Preparing restore...
-if exist "x:\sources\restore" (
-  echo Located restore folder
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
-  goto menu
-)
-if exist "x:\sources\restore\cmd.exe" (
-  echo Command Prompt backup found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
-  goto menu
-)
-if exist "x:\sources\restore\utilman.exe" (
-  echo Utilman backup found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
-  goto menu
-)
-
-echo Restore files found! & echo: & echo Checking System files...
 if exist "c:\windows\system32" (
   echo Located System folder
 ) else (
