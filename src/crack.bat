@@ -112,6 +112,7 @@ if exist "c:\windows\system32" (
   color 0A
   echo Exploit Completed ^| No errors
   pause
+  goto menu
 
 ) else (
   color 0C
@@ -135,6 +136,7 @@ if exist "c:\windows\system32\drivers" (
   echo -----------------------------------
   echo Exploit Completed ^| No errors
   pause
+  goto menu
 
 ) else (
   color 0C
@@ -167,6 +169,7 @@ if exist "c:\windows\system32" (
     echo -----------------------------------
     echo Exploit Completed | No errors
     pause
+    goto menu
 
   ) else (
     color 0C
@@ -236,6 +239,7 @@ color 0A
 echo -----------------------------------
 echo Restore Completed ^| No errors
 pause
+goto menu
 
 :exploit6
 cls
@@ -278,6 +282,7 @@ color 0A
 echo -----------------------------------
 echo Restore Completed ^| No errors
 pause
+goto menu
 
 :cmdFail
 call :showDinoError
