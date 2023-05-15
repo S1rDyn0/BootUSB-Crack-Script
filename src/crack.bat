@@ -166,6 +166,29 @@ if %crackType% EQU 5 (
 )
 
 rem FOR OPTION 6, RESTORE FILES FROM THE RESTORE FOLDER AND THEN FINALY UPDATE THE SYSTEM DRIVE WITH NORMAL FILES
+if %crackType% EQU 6 (
+  cls
+  echo Preparing restore...
+  if /i exist "x:\sources\restore" ( echo Located restore folder ) else ( echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "x:\sources\restore\cmd.exe" ( echo Command Prompt backup found ) else ( echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "x:\sources\restore\utilman.exe" ( echo Utilman backup found ) else ( echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )#
+  
+  echo Backup files located! & echo: & echo Starting restore...
+  echo Deleting exploited utilman.exe
+  del C:\windows\system32\utilman.exe || goto cmdFail
+  echo Restoring utilman.exe...
+  copy X:\sources\restore\utilman.exe C:\windows\system32\utilman.exe || goto cmdFail
+  echo Deleting cmd.exe...
+  del C:\windows\system32\cmd.exe || goto cmdFail
+  echo Restoring cmd.exe...
+  copy X:\sources\restore\cmd.exe C:\windows\system32\cmd.exe || goto cmdFail
+  
+  echo -----------------------------------
+  echo Restore Completed ^| No errors
+  pause
+)
+  
+  
 
 goto menu
 :cmdFail
