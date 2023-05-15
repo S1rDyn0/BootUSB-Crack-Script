@@ -34,7 +34,7 @@ echo ^[6^] Recover Files from Backup
 echo ^[0^] Exit
 echo: & echo: & echo:
 
-set validOptions= 1 2 3 4 5 6
+set validOptions= 0 1 2 3 4 5 6
 set /p crackType=^> 
 
 set optionFound=false
