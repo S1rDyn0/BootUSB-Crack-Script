@@ -50,7 +50,7 @@ if not %optionFound%==true (
   goto menu
 )
 
-if %crackType% EQU 6 (
+if %crackType% EQU 0 (
   cls & echo Exiting...
   exit /b 1
 )
