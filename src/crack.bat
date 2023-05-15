@@ -56,6 +56,7 @@ if not %optionFound%==true (
 )
 
 if "%crackType%" EQU "0" (
+  color 07
   cls & echo Exiting...
   exit /b 1
 )
