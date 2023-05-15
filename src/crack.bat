@@ -2,6 +2,7 @@
 setlocal enabledelayedexpansion
 
 rem Crack Script Made by S1rDyn0
+rem Contributors: Viren070
 
 if /i "%CD:~0,2%" NEQ "X:" (
   color 0C
