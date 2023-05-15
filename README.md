@@ -25,4 +25,5 @@ A Script for enabling local password resets and disabling Sophos's Tamper protec
 ## Authors
 
 - [Sir Dyno](https://www.github.com/s1rdyn0)
+- [Viren](https://www.github.com/viren070)
 
