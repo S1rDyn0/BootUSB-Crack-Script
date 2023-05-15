@@ -15,7 +15,7 @@ if /i "%CD:~0,2%" NEQ "X:" (
   echo You must be in the Installer/Recovery environment to run this script!
   pause
   cls
-  rem exit /b 1
+  exit /b 1
 )
 
 :menu
