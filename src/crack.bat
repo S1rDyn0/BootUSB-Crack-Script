@@ -29,10 +29,12 @@ echo ^[1^] Local Password Exploit
 echo ^[2^] Disable Sophos Tamper Protection
 echo ^[3^] Password ^& Sophos Exploit
 echo ^[4^] Show On-Screen Keyboard
-echo ^[5^] Exit
+echo ^[5^] Restore Password Exploit
+echo ^[6^] Recover Files from Backup
+echo ^[0^] Exit
 echo: & echo: & echo:
 
-set validOptions= 1 2 3 4 5
+set validOptions= 1 2 3 4 5 6
 set /p crackType=^> 
 
 set optionFound=false
@@ -48,7 +50,7 @@ if not %optionFound%==true (
   goto menu
 )
 
-if %crackType% EQU 5 (
+if %crackType% EQU 6 (
   cls & echo Exiting...
   exit /b 1
 )
@@ -138,6 +140,32 @@ if %crackType% EQU 3 (
 if %crackType% EQU 4 (
   "c:/windows/system32/osk.exe"
 )
+
+if %crackType% EQU 5 (
+  cls
+  echo Preparing restore...
+  if /i exist "x:\sources\restore" ( echo Located restore folder ) else ( echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "x:\sources\restore\cmd.exe" ( echo Command Prompt backup found ) else ( echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "x:\sources\restore\utilman.exe" ( echo Utilman backup found ) else ( echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )#
+
+  echo Restore files found! & echo: & echo Checking System files...
+  if /i exist "c:\windows\system32" ( echo Located System folder ) else ( echo Could not find System Folder... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "c:\windows\system32\utilman.old" ( echo Original utilman.exe file found ) else ( echo Could not find utilman.old... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "c:\windows\system32\cmd.exe" ( echo Original cmd.exe file found ) else ( echo Could not find cmd.exe... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+  if /i exist "c:\windows\system32\utilman.exe" ( echo Exploit utilman.exe file found ) else ( echo Could not find exploited utilman... & echo: & echo Failing Exploit and returning to menu & pause & goto menu )
+
+  echo All system files located! & echo: & echo Starting restore...
+  echo Deleting exploited utilman.exe
+  del C:\windows\system32\utilman.exe
+  echo Renaming utilman.old to utilman.exe
+  ren C:\windows\system32\utilman.old utilman.exe
+
+  echo -----------------------------------
+  echo Restore Completed ^| No errors
+  pause
+)
+
+rem FOR OPTION 6, RESTORE FILES FROM THE RESTORE FOLDER AND THEN FINALY UPDATE THE SYSTEM DRIVE WITH NORMAL FILES
 
 goto menu
 :cmdFail
