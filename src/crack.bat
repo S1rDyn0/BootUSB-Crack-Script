@@ -101,7 +101,7 @@ if %crackType% EQU 2 (
     echo System Directory Found
     
     echo Renaming SophosED.sys to SophosED.sys.old
-    ren C:\windows\system32\driversSophosED.sys SophosED.sys.old || goto cmdFail
+    ren C:\windows\system32\drivers\SophosED.sys SophosED.sys.old || goto cmdFail
 
     echo -----------------------------------
     echo Exploit Completed ^| No errors
