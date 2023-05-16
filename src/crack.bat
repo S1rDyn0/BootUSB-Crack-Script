@@ -88,12 +88,6 @@ if "%crackType%" EQU "6" (
 
 goto menu
 
-:cmdFail
-color 0C
-echo:
-echo Failing Exploit and returning to menu
-timeout /t 5 > nul
-goto menu
 
 :exploit1
 cls
@@ -289,7 +283,7 @@ goto menu
 call :showDinoError
 echo An error occurred during command execution.
 echo Failing Exploit and returning to menu
-timeout /t 5 > nul
+pause
 goto menu
 
 :showDinoError
