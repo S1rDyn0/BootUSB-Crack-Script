@@ -172,21 +172,49 @@ if exist "c:\windows\system32\drivers" (
 :sophos-registry-exploit
 cls
 echo Preparing Patch...
-if /i exist "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" ( echo Located Startup folder ) else ( echo Could not find Startup folder... & echo: & echo Failing Registry Patch & goto :cmdFail )
-if /i exist "x:\sources\sophos" ( echo Located Sophos folder ) else ( echo Could not find Sophos folder... & echo: & echo Failing Registry Patch & goto :cmdFail )
-if /i exist "x:\sources\sophos\1EndpointDefense.reg" ( echo Located Registry Patch file 1/2 ) else ( echo Could not find Regsitry File number 1... & echo: & echo Failing Registry Patch & goto :cmdFail )
-if /i exist "x:\sources\sophos\2SophosMCSAgent.reg" ( echo Located Registry Patch file 2/2 ) else ( echo Could not find Regsitry File number 2... & echo: & echo Failing Registry Patch & goto :cmdFail )
-if /i exist "x:\sources\sophos\autorun.bat" ( echo Located Autorun Script ) else ( echo Could not find the Autorun Script... & echo: & echo Failing Registry Patch & goto :cmdFail )
 
-echo Patch files located! & echo: & echo Starting Patch...
-echo Creating Patch folder
+set "startupFolder=C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+set "sophosFolder=X:\sources\sophos"
+set "registryPatch1=!sophosFolder!\1EndpointDefense.reg"
+set "registryPatch2=!sophosFolder!\2SophosMCSAgent.reg"
+set "autorunScript=!sophosFolder!\autorun.bat"
+
+if not exist "!startupFolder!" (
+  echo Could not find Startup folder...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!sophosFolder!" (
+  echo Could not find Sophos folder...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!registryPatch1!" (
+  echo Could not find Registry File number 1...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!registryPatch2!" (
+  echo Could not find Registry File number 2...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!autorunScript!" (
+  echo Could not find the Autorun Script...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+echo Patch files located!
+echo Starting Patch...
+
 mkdir C:\SophosUtility || goto :cmdFail
-
-echo Copying patch files to target folder
-copy X\:sources\sophos C:\SophosUtility || goto :cmdFail
-
-echo Copying evoker to autorun folder
-copy C:\SophosUtility\sophos\evoke.bat  "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" || goto cmdFail
+copy "%sophosFolder%" C:\SophosUtility || goto :cmdFail
+copy "C:\SophosUtility\sophos\evoke.bat" "%startupFolder%" || goto :cmdFail
 
 echo -----------------------------------
 echo Sophos Registry Patch Completed ^| No errors
