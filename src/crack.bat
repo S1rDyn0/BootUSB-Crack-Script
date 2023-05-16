@@ -290,6 +290,7 @@ pause
 goto menu
 
 :cmdFail
+echo ------------------------------------------------
 call :showDinoError
 echo An error occurred during command execution.
 echo Failing Exploit and returning to menu
