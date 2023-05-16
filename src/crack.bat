@@ -69,8 +69,6 @@ if not !optionFound!==true (
   timeout /t 5 
   goto menu
 )
-echo you have a valid option 
-pause
 if "!crackType!" EQU "0" (
   color 07
   cls & echo Exiting...
