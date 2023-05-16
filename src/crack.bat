@@ -218,7 +218,9 @@ copy "C:\SophosUtility\sophos\evoke.bat" "%startupFolder%" || goto :cmdFail
 
 echo -----------------------------------
 echo Sophos Registry Patch Completed ^| No errors
-pause
+echo Returning to Menu
+timeout /t 5
+goto menu 
 
 :undo-password-exploit
 cls
