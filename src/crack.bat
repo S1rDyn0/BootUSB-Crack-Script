@@ -18,7 +18,7 @@ if /i "%CD:~0,2%" NEQ "X:" (
   pause
   cls
   color 07
-  exit /b 1
+  exit 
 ) else (
   cls
   color 3F
@@ -83,7 +83,14 @@ if "!crackType!" EQU "3" (
 )
 
 if "!crackType!" EQU "4" (
-  start "" "C:\windows\system32\osk.exe"
+  echo Running OSK.exe...
+  start "" "C:\windows\system32\osk.exe" || goto :cmdFail
+  color 0A
+  cls
+  echo Started OSK.exe 
+  echo Returning to menu...
+  timeout /t 5
+  
   goto :menu
 )
 
