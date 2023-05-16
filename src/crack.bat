@@ -212,7 +212,9 @@ if not exist "!autorunScript!" (
 echo Patch files located!
 echo Starting Patch...
 
-mkdir C:\SophosUtility || goto :cmdFail
+if not exist C:\SophosUtility (
+  mkdir C:\SophosUtility || goto :cmdFail
+)
 copy "%sophosFolder%" C:\SophosUtility || goto :cmdFail
 copy "C:\SophosUtility\sophos\evoke.bat" "%startupFolder%" || goto :cmdFail
 
