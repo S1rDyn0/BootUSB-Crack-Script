@@ -16,11 +16,11 @@ A Script for enabling local password resets and disabling Sophos's Tamper protec
 | ID |Description|
 |:-- | :---------|
 | `1` | Enables Login Screen hack where utilman.exe will be replaced with an administrator command prompt. |
-| `2` | Disables the SophosED.sys file so that registry values can be edited and Sophos can be removed. |
-| `3` | Runs both script `1` and `2` |
-| `4` | Runs the on-screen keyboard |
-| `5` | Restore password exploit |
-| `6` | Recover files from backup |
+| `2` | Disables the Login Screen hack |
+| `3` | Restore original cmd.exe and utilman.exe |
+| `4` | Disable Sophos Tamper Protection |
+| `5` | Sophos Registry Exploit |
+| `6` | Show the on-screen keyboard |
 
 
 

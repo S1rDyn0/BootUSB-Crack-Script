@@ -52,6 +52,7 @@ echo ^[0^] Exit
 echo: & echo: & echo:
 
 set validOptions=0 1 2 3 4 5 6
+set "crackType="
 set /p "crackType=^>"
 
 set optionFound=false
