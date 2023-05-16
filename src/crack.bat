@@ -6,8 +6,15 @@ rem Contributors: Viren070
 
 if /i "%CD:~0,2%" NEQ "X:" (
   color 0C
-  call :showDinoError
-  echo You must be in the Installer/Recovery environment to run this script!
+  color 0C
+  echo                __
+  echo               / _^)
+  echo      _.----._/ /
+  echo     /         /
+  echo  __/ ^(  ^| ^(  ^|
+  echo /__.-^'^|_^|--^|_^|
+  echo EXPLOIT ERROR... & echo:
+  echo You must be in the Installer/Recovery environment to run this script^!
   pause
   cls
   color 07
