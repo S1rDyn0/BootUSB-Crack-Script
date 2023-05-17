@@ -33,7 +33,7 @@ echo ^|==================================^|
 echo ^|  WINDOWS 10  EXPLOIT BY S1rDyn0  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|  BUILD ^| Production     23.5.9   ^|
+echo ^|  BUILD ^| Production     23.5.11   ^|
 echo ^|==================================^| & echo: & echo:
 
 echo +++++ Password Exploit
