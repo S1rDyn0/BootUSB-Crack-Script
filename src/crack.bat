@@ -151,6 +151,7 @@ if exist "c:\windows\system32\drivers" (
   echo System Directory Found
     
   if not exist "C:\windows\system32\drivers\SophosED.sys" (
+    color 0C
     :showDinoError
     echo SophosED.sys file could not be found 
     echo Failing Exploit and returning to menu 
