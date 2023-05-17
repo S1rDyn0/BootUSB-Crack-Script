@@ -262,6 +262,7 @@ if exist "c:\windows\system32\utilman.exe" (
 echo All system files located^! & echo: & echo Starting undo...
 echo Renaming utilman.old to utilman.exe....
 copy /y C:\windows\system32\utilman.old C:\windows\system32\utilman.exe || goto :cmdFail
+del C:\windows\system32\utilman.old
 
 
 color 0A
