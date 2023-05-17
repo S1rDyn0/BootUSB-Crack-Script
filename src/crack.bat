@@ -150,7 +150,7 @@ echo Starting Hack
 if exist "c:\windows\system32\drivers" (
   echo System Directory Found
     
-  if exist "C:\windows\system32\drivers\SophosED.sys" (
+  if not exist "C:\windows\system32\drivers\SophosED.sys" (
     :showDinoError
     echo SophosED.sys file could not be found 
     echo Failing Exploit and returning to menu 
