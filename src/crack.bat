@@ -319,6 +319,8 @@ cls
 echo Preparing restore...
 set "cmdBackup=X:\sources\restore\cmd.exe"
 set "utilmanBackup=X:\sources\restore\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+
 if exist "x:\sources\restore" (
   echo Located restore folder
 ) else (
@@ -348,7 +350,14 @@ if exist !utilmanBackup! (
 )
 
 echo Backup files located^! & echo: & echo Starting restore...
+
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old...
+  del "%UtilmanOldPath%"
+)
+echo Restoring utilman.exe...
 copy /y !utilmanBackup! C:\windows\system32 || goto :cmdFail
+echo. & echo Restoring cmd.exe...
 copy /y !cmdBackup! C:\windows\system32 || goto :cmdFail
 
 color 0A
