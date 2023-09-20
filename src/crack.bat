@@ -23,14 +23,14 @@ if /i "%CD:~0,2%" NEQ "X:" (
   color 3F
   echo: & echo Proceed with caution, we do not take any responsibility for damage caused by this script.
   echo Credit to S1rDyno for the orginal script ^& Viren070 for contributing to improve it.
-  echo: & echo https://github.com/S1rDyn0/BootUSB-Crack-Script ^| OpenSource & echo: & echo: & echo:
+  echo: & echo https://github.com/Viren070/BootUSB-Crack-Script ^| OpenSource & echo: & echo: & echo:
   pause
 )
 :menu
 color 07
 cls
 echo ^|==================================^|
-echo ^|  WINDOWS 10  EXPLOIT BY S1rDyn0  ^|
+echo ^|  WINDOWS 10  EXPLOIT BY Viren070  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
 echo ^|  BUILD ^| Production    23.9.1   ^|
@@ -182,10 +182,7 @@ echo Exploit Completed ^| No errors
 pause
 goto menu
 
-rem Option 4 is for the Sophos registry hack. This will use xcopy to make a new folder at C:\SophosUtility
-rem It will next copy the sophos folder inside that directory.
-rem Then it will copy evoke.bat to C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup as shortcut creation requires vbs script and not good choice in recovery environment
-rem this will run autorun.bat script located in C:\SophosUtility\Sophos\autorub.bat
+
 :disable-sophos-tamper-protection
 cls
 echo Starting Hack
