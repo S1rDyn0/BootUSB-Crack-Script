@@ -155,7 +155,7 @@ echo Starting Hack...
 echo. 
 set "UtilmanPath=C:\Windows\System32\utilman.exe"
 set "UtilmanOldPath=C:\Windows\System32\utilman.old"
-set "PowershellPath=C:\Windows\System32\WindowsPowershell\v1.0\powershell.exe"
+set "PowershellPath=C:\Windows\System32\WindowsPowershell\v1.0\powershell_ise.exe"
 
 if exist "%UtilmanOldPath%" (
   echo Deleting existing utilman.old
