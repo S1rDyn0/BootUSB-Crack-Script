@@ -28,7 +28,7 @@ echo ^|==================================^|
 echo ^|  WINDOWS 10 EXPLOIT BY Viren070  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|    BUILD ^| Production 23.9.3     ^|
+echo ^|    BUILD ^| Production 23.9.4     ^|
 echo ^|==================================^| & echo: & echo: & echo:
 
 echo +++++ Accessibility Menu Exploit
