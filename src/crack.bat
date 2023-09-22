@@ -215,6 +215,7 @@ if exist "c:\windows\system32\drivers" (
   timeout /t 5 
   goto menu
 ) 
+goto menu
 
 :sophos-registry-exploit
 cls
