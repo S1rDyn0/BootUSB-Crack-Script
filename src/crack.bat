@@ -30,10 +30,10 @@ if /i "%CD:~0,2%" NEQ "X:" (
 color 07
 cls
 echo ^|==================================^|
-echo ^|  WINDOWS 10  EXPLOIT BY Viren070  ^|
+echo ^|  WINDOWS 10 EXPLOIT BY Viren070  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|  BUILD ^| Production    23.9.1   ^|
+echo ^|    BUILD ^| Production 23.9.2     ^|
 echo ^|==================================^| & echo: & echo:
 
 echo +++++ Password Exploit
