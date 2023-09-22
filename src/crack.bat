@@ -363,6 +363,9 @@ copy /y !utilmanBackup! C:\windows\system32 || goto :cmdFail
 echo. & echo Restoring cmd.exe...
 copy /y !cmdBackup! C:\windows\system32 || goto :cmdFail
 
+echo Attempting restore using SFC & echo.
+sfc /scanfile=c:\windows\system32\utilman.exe
+sfc /scanfile=c:\windows\system32\cmd.exe
 color 0A
 echo -----------------------------------
 echo Restore Completed ^| No errors
