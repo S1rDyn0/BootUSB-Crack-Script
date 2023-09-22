@@ -191,7 +191,7 @@ if exist "c:\windows\system32\drivers" (
     
   if not exist "C:\windows\system32\drivers\SophosED.sys" (
     color 0C
-    :showDinoError
+    call :showDinoError
     echo SophosED.sys file could not be found 
     echo Failing Exploit and returning to menu 
     timeout /t 5
