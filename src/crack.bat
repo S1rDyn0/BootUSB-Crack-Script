@@ -100,14 +100,7 @@ if "!crackType!" EQU "7" (
 )
 
 if "!crackType!" EQU "8" (
-  echo Running OSK.exe...
   start "" "C:\windows\system32\osk.exe" || goto :cmdFail
-  color 0A
-  cls
-  echo Started OSK.exe 
-  echo Returning to menu...
-  timeout /t 5
-  
   goto :menu
 )
 
