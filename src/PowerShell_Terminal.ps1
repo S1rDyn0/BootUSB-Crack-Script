@@ -7,7 +7,9 @@ while ($true) {
 
     try {
         Invoke-Expression $userInput
+	Write-Host " "
     } catch {
         Write-Host "Error: $_"
+	Write-Host " "
     }
 }
