@@ -3,6 +3,9 @@
 
 A Script for enabling local password resets and disabling Sophos's Tamper protection.
 
+> [!NOTE]  
+> This script is scheduled to receive a major UI overhaul. Therefore this script will not be updated until late Decemeber.
+
 
 ## Script Reference
 
