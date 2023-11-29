@@ -1,1 +1,1 @@
-start C:\SophosUtility\sophos\autorun.bat
+start C:\SophosUtility\autorun.bat
