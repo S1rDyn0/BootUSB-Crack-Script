@@ -25,10 +25,11 @@ if /i "%CD:~0,2%" NEQ "X:" (
 color 07
 cls
 echo ^|==================================^|
-echo ^|  WINDOWS 10 EXPLOIT BY Viren070  ^|
-echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^| 
+echo ^|  WINDOWS 10 EXPLOIT BY S1rDyno   ^|
+echo ^|   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~    ^|
+echo ^|        Edited by Viren070        ^|
 echo ^|                                  ^|
-echo ^|    BUILD ^| Production 23.9.7     ^|
+echo ^|    BUILD ^| Production 0.9.1     ^|
 echo ^|==================================^| & echo: & echo: & echo:
 
 echo +++++ Accessibility Menu Exploit
